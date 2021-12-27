@@ -1,0 +1,1007 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OritProjectGoodLuckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="codeAdress" />
+          </Key>
+          <Property Name="street" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="numberHouse" Type="int" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="floor" Type="int" Nullable="false" />
+          <Property Name="cnisa" Type="int" Nullable="false" />
+          <Property Name="numberFlat" Type="int" Nullable="false" />
+          <Property Name="IsParking" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="heaara" Type="nchar" MaxLength="10" />
+          <Property Name="codeAdress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConditationMedical">
+          <Key>
+            <PropertyRef Name="idConditation" />
+          </Key>
+          <Property Name="idConditation" Type="int" Nullable="false" />
+          <Property Name="teurConditation" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="doctorOpinion" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyReportToDoctor">
+          <Key>
+            <PropertyRef Name="idDoctor" />
+          </Key>
+          <Property Name="idDoctor" Type="int" Nullable="false" />
+          <Property Name="patientsForTomorow" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adressesList" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="machines" Type="nvarchar" MaxLength="50" />
+          <Property Name="fastestWay" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyRoute">
+          <Key>
+            <PropertyRef Name="idMishmeret" />
+            <PropertyRef Name="idDoctor" />
+          </Key>
+          <Property Name="dateO" Type="date" Nullable="false" />
+          <Property Name="idMishmeret" Type="int" Nullable="false" />
+          <Property Name="idDoctor" Type="int" Nullable="false" />
+          <Property Name="nunbersOfPatients" Type="int" Nullable="false" />
+          <Property Name="currentIndex" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="lastName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="codeStatusCovid" Type="int" Nullable="false" />
+          <Property Name="gender" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="hoursOfWork" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="location" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="codeMachine" />
+          </Key>
+          <Property Name="codeMachine" Type="int" Nullable="false" />
+          <Property Name="nameMachine" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentOfPatient">
+          <Key>
+            <PropertyRef Name="idMachine" />
+            <PropertyRef Name="idPatient" />
+          </Key>
+          <Property Name="idMachine" Type="int" Nullable="false" />
+          <Property Name="idPatient" Type="int" Nullable="false" />
+          <Property Name="dateOfTake" Type="date" Nullable="false" />
+          <Property Name="dateOfReturn" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="x" Type="float" Nullable="false" />
+          <Property Name="y" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderHomeHospitalization">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPatient" Type="int" Nullable="false" />
+          <Property Name="idDoctor" Type="int" />
+          <Property Name="dateOf" Type="date" Nullable="false" />
+          <Property Name="hourOfVisit" Type="datetime" />
+          <Property Name="levelOfUrgent" Type="int" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nchar" MaxLength="10" />
+          <Property Name="lastName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="statuscovid19" Type="int" Nullable="false" />
+          <Property Name="gender" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="codeAdress" Type="int" Nullable="false" />
+          <Property Name="machine" Type="int" />
+          <Property Name="medicalCondition" Type="int" Nullable="false" />
+          <Property Name="age" Type="int" />
+          <Property Name="levelUrgent" Type="int" />
+          <Property Name="doctorId" Type="int" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduleForDoctor">
+          <Key>
+            <PropertyRef Name="idDoctor" />
+            <PropertyRef Name="idMishmeret" />
+          </Key>
+          <Property Name="idDoctor" Type="int" Nullable="false" />
+          <Property Name="idMishmeret" Type="int" Nullable="false" />
+          <Property Name="day" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="fromHour" Type="datetime" Nullable="false" />
+          <Property Name="toHour" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusCovid19">
+          <Key>
+            <PropertyRef Name="codeStatus" />
+          </Key>
+          <Property Name="codeStatus" Type="int" Nullable="false" />
+          <Property Name="descriptionStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OritProjectGoodLuck.dbo.Storage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="idStorage" />
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="idStorage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_DailyReportToDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DailyReportToDoctor" Type="Self.DailyReportToDoctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DailyReportToDoctor">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_StatusCovid19">
+          <End Role="StatusCovid19" Type="Self.StatusCovid19" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCovid19">
+              <PropertyRef Name="codeStatus" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="codeStatusCovid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderHomeHospitalization_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="OrderHomeHospitalization" Type="Self.OrderHomeHospitalization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderHomeHospitalization">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderHomeHospitalization_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="OrderHomeHospitalization" Type="Self.OrderHomeHospitalization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderHomeHospitalization">
+              <PropertyRef Name="idPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Adress">
+          <End Role="Adress" Type="Self.Adress" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="codeAdress" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="codeAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_ConditationMedical">
+          <End Role="ConditationMedical" Type="Self.ConditationMedical" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConditationMedical">
+              <PropertyRef Name="idConditation" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="medicalCondition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="codeMachine" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="machine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_EquipmentOfPatient">
+          <End Role="EquipmentOfPatient" Type="Self.EquipmentOfPatient" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentOfPatient">
+              <PropertyRef Name="idMachine" />
+              <PropertyRef Name="idPatient" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="machine" />
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_StatusCovid19">
+          <End Role="StatusCovid19" Type="Self.StatusCovid19" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCovid19">
+              <PropertyRef Name="codeStatus" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="statuscovid19" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleForDoctor_DailyRoute">
+          <End Role="DailyRoute" Type="Self.DailyRoute" Multiplicity="1" />
+          <End Role="ScheduleForDoctor" Type="Self.ScheduleForDoctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DailyRoute">
+              <PropertyRef Name="idMishmeret" />
+              <PropertyRef Name="idDoctor" />
+            </Principal>
+            <Dependent Role="ScheduleForDoctor">
+              <PropertyRef Name="idMishmeret" />
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleForDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="ScheduleForDoctor" Type="Self.ScheduleForDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ScheduleForDoctor">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OritProjectGoodLuckModelStoreContainer">
+          <EntitySet Name="Adress" EntityType="Self.Adress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConditationMedical" EntityType="Self.ConditationMedical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyReportToDoctor" EntityType="Self.DailyReportToDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyRoute" EntityType="Self.DailyRoute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentOfPatient" EntityType="Self.EquipmentOfPatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderHomeHospitalization" EntityType="Self.OrderHomeHospitalization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleForDoctor" EntityType="Self.ScheduleForDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusCovid19" EntityType="Self.StatusCovid19" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Storage].[idStorage] AS [idStorage], 
+    [Storage].[locationId] AS [locationId]
+    FROM [dbo].[Storage] AS [Storage]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_DailyReportToDoctor_Doctor" Association="Self.FK_DailyReportToDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DailyReportToDoctor" EntitySet="DailyReportToDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_Location" Association="Self.FK_Doctor_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_StatusCovid19" Association="Self.FK_Doctor_StatusCovid19">
+            <End Role="StatusCovid19" EntitySet="StatusCovid19" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderHomeHospitalization_Doctor" Association="Self.FK_OrderHomeHospitalization_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="OrderHomeHospitalization" EntitySet="OrderHomeHospitalization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderHomeHospitalization_Patient" Association="Self.FK_OrderHomeHospitalization_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="OrderHomeHospitalization" EntitySet="OrderHomeHospitalization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Adress" Association="Self.FK_Patient_Adress">
+            <End Role="Adress" EntitySet="Adress" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_ConditationMedical" Association="Self.FK_Patient_ConditationMedical">
+            <End Role="ConditationMedical" EntitySet="ConditationMedical" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Equipment" Association="Self.FK_Patient_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_EquipmentOfPatient" Association="Self.FK_Patient_EquipmentOfPatient">
+            <End Role="EquipmentOfPatient" EntitySet="EquipmentOfPatient" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Location" Association="Self.FK_Patient_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_StatusCovid19" Association="Self.FK_Patient_StatusCovid19">
+            <End Role="StatusCovid19" EntitySet="StatusCovid19" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleForDoctor_DailyRoute" Association="Self.FK_ScheduleForDoctor_DailyRoute">
+            <End Role="DailyRoute" EntitySet="DailyRoute" />
+            <End Role="ScheduleForDoctor" EntitySet="ScheduleForDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleForDoctor_Doctor" Association="Self.FK_ScheduleForDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="ScheduleForDoctor" EntitySet="ScheduleForDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Location" Association="Self.FK_Storage_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OritProjectGoodLuckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="codeAdress" />
+          </Key>
+          <Property Name="street" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="numberHouse" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="floor" Type="Int32" Nullable="false" />
+          <Property Name="cnisa" Type="Int32" Nullable="false" />
+          <Property Name="numberFlat" Type="Int32" Nullable="false" />
+          <Property Name="IsParking" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="heaara" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="codeAdress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Adress" FromRole="Adress" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="ConditationMedical">
+          <Key>
+            <PropertyRef Name="idConditation" />
+          </Key>
+          <Property Name="idConditation" Type="Int32" Nullable="false" />
+          <Property Name="teurConditation" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="doctorOpinion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_ConditationMedical" FromRole="ConditationMedical" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="DailyReportToDoctor">
+          <Key>
+            <PropertyRef Name="idDoctor" />
+          </Key>
+          <Property Name="idDoctor" Type="Int32" Nullable="false" />
+          <Property Name="patientsForTomorow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adressesList" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="machines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fastestWay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_DailyReportToDoctor_Doctor" FromRole="DailyReportToDoctor" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="DailyRoute">
+          <Key>
+            <PropertyRef Name="idMishmeret" />
+            <PropertyRef Name="idDoctor" />
+          </Key>
+          <Property Name="dateO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idMishmeret" Type="Int32" Nullable="false" />
+          <Property Name="idDoctor" Type="Int32" Nullable="false" />
+          <Property Name="nunbersOfPatients" Type="Int32" Nullable="false" />
+          <Property Name="currentIndex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ScheduleForDoctor" Relationship="Self.FK_ScheduleForDoctor_DailyRoute" FromRole="DailyRoute" ToRole="ScheduleForDoctor" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codeStatusCovid" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="hoursOfWork" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="location" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DailyReportToDoctor" Relationship="Self.FK_DailyReportToDoctor_Doctor" FromRole="Doctor" ToRole="DailyReportToDoctor" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK_Doctor_Location" FromRole="Doctor" ToRole="Location" />
+          <NavigationProperty Name="StatusCovid19" Relationship="Self.FK_Doctor_StatusCovid19" FromRole="Doctor" ToRole="StatusCovid19" />
+          <NavigationProperty Name="OrderHomeHospitalization" Relationship="Self.FK_OrderHomeHospitalization_Doctor" FromRole="Doctor" ToRole="OrderHomeHospitalization" />
+          <NavigationProperty Name="ScheduleForDoctor" Relationship="Self.FK_ScheduleForDoctor_Doctor" FromRole="Doctor" ToRole="ScheduleForDoctor" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="codeMachine" />
+          </Key>
+          <Property Name="codeMachine" Type="Int32" Nullable="false" />
+          <Property Name="nameMachine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Equipment" FromRole="Equipment" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="EquipmentOfPatient">
+          <Key>
+            <PropertyRef Name="idMachine" />
+            <PropertyRef Name="idPatient" />
+          </Key>
+          <Property Name="idMachine" Type="Int32" Nullable="false" />
+          <Property Name="idPatient" Type="Int32" Nullable="false" />
+          <Property Name="dateOfTake" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateOfReturn" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_EquipmentOfPatient" FromRole="EquipmentOfPatient" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="x" Type="Double" Nullable="false" />
+          <Property Name="y" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Doctor_Location" FromRole="Location" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Location" FromRole="Location" ToRole="Patient" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_Location" FromRole="Location" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="OrderHomeHospitalization">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPatient" Type="Int32" Nullable="false" />
+          <Property Name="idDoctor" Type="Int32" />
+          <Property Name="dateOf" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hourOfVisit" Type="DateTime" Precision="3" />
+          <Property Name="levelOfUrgent" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_OrderHomeHospitalization_Doctor" FromRole="OrderHomeHospitalization" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_OrderHomeHospitalization_Patient" FromRole="OrderHomeHospitalization" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="statuscovid19" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="codeAdress" Type="Int32" Nullable="false" />
+          <Property Name="machine" Type="Int32" />
+          <Property Name="medicalCondition" Type="Int32" Nullable="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="levelUrgent" Type="Int32" />
+          <Property Name="doctorId" Type="Int32" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Adress" Relationship="Self.FK_Patient_Adress" FromRole="Patient" ToRole="Adress" />
+          <NavigationProperty Name="ConditationMedical" Relationship="Self.FK_Patient_ConditationMedical" FromRole="Patient" ToRole="ConditationMedical" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_Patient_Equipment" FromRole="Patient" ToRole="Equipment" />
+          <NavigationProperty Name="EquipmentOfPatient" Relationship="Self.FK_Patient_EquipmentOfPatient" FromRole="Patient" ToRole="EquipmentOfPatient" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Patient_Location" FromRole="Patient" ToRole="Location" />
+          <NavigationProperty Name="OrderHomeHospitalization" Relationship="Self.FK_OrderHomeHospitalization_Patient" FromRole="Patient" ToRole="OrderHomeHospitalization" />
+          <NavigationProperty Name="StatusCovid191" Relationship="Self.FK_Patient_StatusCovid19" FromRole="Patient" ToRole="StatusCovid19" />
+        </EntityType>
+        <EntityType Name="ScheduleForDoctor">
+          <Key>
+            <PropertyRef Name="idDoctor" />
+            <PropertyRef Name="idMishmeret" />
+          </Key>
+          <Property Name="idDoctor" Type="Int32" Nullable="false" />
+          <Property Name="idMishmeret" Type="Int32" Nullable="false" />
+          <Property Name="day" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="fromHour" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="toHour" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DailyRoute" Relationship="Self.FK_ScheduleForDoctor_DailyRoute" FromRole="ScheduleForDoctor" ToRole="DailyRoute" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_ScheduleForDoctor_Doctor" FromRole="ScheduleForDoctor" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="StatusCovid19">
+          <Key>
+            <PropertyRef Name="codeStatus" />
+          </Key>
+          <Property Name="codeStatus" Type="Int32" Nullable="false" />
+          <Property Name="descriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Doctor_StatusCovid19" FromRole="StatusCovid19" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_StatusCovid19" FromRole="StatusCovid19" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="idStorage" />
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="idStorage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Storage_Location" FromRole="Storage" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_Patient_Adress">
+          <End Role="Adress" Type="Self.Adress" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="codeAdress" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="codeAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_ConditationMedical">
+          <End Role="ConditationMedical" Type="Self.ConditationMedical" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConditationMedical">
+              <PropertyRef Name="idConditation" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="medicalCondition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyReportToDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DailyReportToDoctor" Type="Self.DailyReportToDoctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DailyReportToDoctor">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleForDoctor_DailyRoute">
+          <End Role="DailyRoute" Type="Self.DailyRoute" Multiplicity="1" />
+          <End Role="ScheduleForDoctor" Type="Self.ScheduleForDoctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DailyRoute">
+              <PropertyRef Name="idMishmeret" />
+              <PropertyRef Name="idDoctor" />
+            </Principal>
+            <Dependent Role="ScheduleForDoctor">
+              <PropertyRef Name="idMishmeret" />
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_StatusCovid19">
+          <End Role="StatusCovid19" Type="Self.StatusCovid19" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCovid19">
+              <PropertyRef Name="codeStatus" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="codeStatusCovid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderHomeHospitalization_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="OrderHomeHospitalization" Type="Self.OrderHomeHospitalization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderHomeHospitalization">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleForDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="ScheduleForDoctor" Type="Self.ScheduleForDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ScheduleForDoctor">
+              <PropertyRef Name="idDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="codeMachine" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="machine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_EquipmentOfPatient">
+          <End Role="EquipmentOfPatient" Type="Self.EquipmentOfPatient" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentOfPatient">
+              <PropertyRef Name="idMachine" />
+              <PropertyRef Name="idPatient" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="machine" />
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderHomeHospitalization_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="OrderHomeHospitalization" Type="Self.OrderHomeHospitalization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderHomeHospitalization">
+              <PropertyRef Name="idPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_StatusCovid19">
+          <End Role="StatusCovid19" Type="Self.StatusCovid19" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCovid19">
+              <PropertyRef Name="codeStatus" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="statuscovid19" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OritProjectGoodLuckEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adress" EntityType="Self.Adress" />
+          <EntitySet Name="ConditationMedical" EntityType="Self.ConditationMedical" />
+          <EntitySet Name="DailyReportToDoctor" EntityType="Self.DailyReportToDoctor" />
+          <EntitySet Name="DailyRoute" EntityType="Self.DailyRoute" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentOfPatient" EntityType="Self.EquipmentOfPatient" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="OrderHomeHospitalization" EntityType="Self.OrderHomeHospitalization" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="ScheduleForDoctor" EntityType="Self.ScheduleForDoctor" />
+          <EntitySet Name="StatusCovid19" EntityType="Self.StatusCovid19" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <AssociationSet Name="FK_Patient_Adress" Association="Self.FK_Patient_Adress">
+            <End Role="Adress" EntitySet="Adress" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_ConditationMedical" Association="Self.FK_Patient_ConditationMedical">
+            <End Role="ConditationMedical" EntitySet="ConditationMedical" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyReportToDoctor_Doctor" Association="Self.FK_DailyReportToDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DailyReportToDoctor" EntitySet="DailyReportToDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleForDoctor_DailyRoute" Association="Self.FK_ScheduleForDoctor_DailyRoute">
+            <End Role="DailyRoute" EntitySet="DailyRoute" />
+            <End Role="ScheduleForDoctor" EntitySet="ScheduleForDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_Location" Association="Self.FK_Doctor_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_StatusCovid19" Association="Self.FK_Doctor_StatusCovid19">
+            <End Role="StatusCovid19" EntitySet="StatusCovid19" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderHomeHospitalization_Doctor" Association="Self.FK_OrderHomeHospitalization_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="OrderHomeHospitalization" EntitySet="OrderHomeHospitalization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleForDoctor_Doctor" Association="Self.FK_ScheduleForDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="ScheduleForDoctor" EntitySet="ScheduleForDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Equipment" Association="Self.FK_Patient_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_EquipmentOfPatient" Association="Self.FK_Patient_EquipmentOfPatient">
+            <End Role="EquipmentOfPatient" EntitySet="EquipmentOfPatient" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Location" Association="Self.FK_Patient_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_Location" Association="Self.FK_Storage_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderHomeHospitalization_Patient" Association="Self.FK_OrderHomeHospitalization_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="OrderHomeHospitalization" EntitySet="OrderHomeHospitalization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_StatusCovid19" Association="Self.FK_Patient_StatusCovid19">
+            <End Role="StatusCovid19" EntitySet="StatusCovid19" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OritProjectGoodLuckModelStoreContainer" CdmEntityContainer="OritProjectGoodLuckEntities2">
+          <EntitySetMapping Name="Adress">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Adress">
+              <MappingFragment StoreEntitySet="Adress">
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="numberHouse" ColumnName="numberHouse" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="cnisa" ColumnName="cnisa" />
+                <ScalarProperty Name="numberFlat" ColumnName="numberFlat" />
+                <ScalarProperty Name="IsParking" ColumnName="IsParking" />
+                <ScalarProperty Name="heaara" ColumnName="heaara" />
+                <ScalarProperty Name="codeAdress" ColumnName="codeAdress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConditationMedical">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.ConditationMedical">
+              <MappingFragment StoreEntitySet="ConditationMedical">
+                <ScalarProperty Name="idConditation" ColumnName="idConditation" />
+                <ScalarProperty Name="teurConditation" ColumnName="teurConditation" />
+                <ScalarProperty Name="doctorOpinion" ColumnName="doctorOpinion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyReportToDoctor">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.DailyReportToDoctor">
+              <MappingFragment StoreEntitySet="DailyReportToDoctor">
+                <ScalarProperty Name="idDoctor" ColumnName="idDoctor" />
+                <ScalarProperty Name="patientsForTomorow" ColumnName="patientsForTomorow" />
+                <ScalarProperty Name="adressesList" ColumnName="adressesList" />
+                <ScalarProperty Name="machines" ColumnName="machines" />
+                <ScalarProperty Name="fastestWay" ColumnName="fastestWay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyRoute">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.DailyRoute">
+              <MappingFragment StoreEntitySet="DailyRoute">
+                <ScalarProperty Name="dateO" ColumnName="dateO" />
+                <ScalarProperty Name="idMishmeret" ColumnName="idMishmeret" />
+                <ScalarProperty Name="idDoctor" ColumnName="idDoctor" />
+                <ScalarProperty Name="nunbersOfPatients" ColumnName="nunbersOfPatients" />
+                <ScalarProperty Name="currentIndex" ColumnName="currentIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="codeStatusCovid" ColumnName="codeStatusCovid" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="hoursOfWork" ColumnName="hoursOfWork" />
+                <ScalarProperty Name="location" ColumnName="location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="codeMachine" ColumnName="codeMachine" />
+                <ScalarProperty Name="nameMachine" ColumnName="nameMachine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentOfPatient">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.EquipmentOfPatient">
+              <MappingFragment StoreEntitySet="EquipmentOfPatient">
+                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
+                <ScalarProperty Name="idPatient" ColumnName="idPatient" />
+                <ScalarProperty Name="dateOfTake" ColumnName="dateOfTake" />
+                <ScalarProperty Name="dateOfReturn" ColumnName="dateOfReturn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="x" ColumnName="x" />
+                <ScalarProperty Name="y" ColumnName="y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderHomeHospitalization">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.OrderHomeHospitalization">
+              <MappingFragment StoreEntitySet="OrderHomeHospitalization">
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="idPatient" ColumnName="idPatient" />
+                <ScalarProperty Name="idDoctor" ColumnName="idDoctor" />
+                <ScalarProperty Name="dateOf" ColumnName="dateOf" />
+                <ScalarProperty Name="hourOfVisit" ColumnName="hourOfVisit" />
+                <ScalarProperty Name="levelOfUrgent" ColumnName="levelOfUrgent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="statuscovid19" ColumnName="statuscovid19" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="codeAdress" ColumnName="codeAdress" />
+                <ScalarProperty Name="machine" ColumnName="machine" />
+                <ScalarProperty Name="medicalCondition" ColumnName="medicalCondition" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="levelUrgent" ColumnName="levelUrgent" />
+                <ScalarProperty Name="doctorId" ColumnName="doctorId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleForDoctor">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.ScheduleForDoctor">
+              <MappingFragment StoreEntitySet="ScheduleForDoctor">
+                <ScalarProperty Name="idDoctor" ColumnName="idDoctor" />
+                <ScalarProperty Name="idMishmeret" ColumnName="idMishmeret" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="fromHour" ColumnName="fromHour" />
+                <ScalarProperty Name="toHour" ColumnName="toHour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusCovid19">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.StatusCovid19">
+              <MappingFragment StoreEntitySet="StatusCovid19">
+                <ScalarProperty Name="codeStatus" ColumnName="codeStatus" />
+                <ScalarProperty Name="descriptionStatus" ColumnName="descriptionStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="OritProjectGoodLuckModel.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="idStorage" ColumnName="idStorage" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

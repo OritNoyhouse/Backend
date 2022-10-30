@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -26,20 +26,16 @@ namespace HomeHospital.Controllers
         }
 
         // POST: api/FastestWay
-        public void Post(DailyRouteDto a)
+        public void Post(DailyRouteDto dailyRoute)
         {
-            classDb.AddDailyRoute(a);
+            classDb.AddDailyRoute(dailyRoute);
         }
-
-        // PUT: api/FastestWay/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+      
 
         // DELETE: api/FastestWay/5
-        public void Delete(DailyRouteDto a)
+        public void Delete(DailyRouteDto dailyRoute)
         {
-            classDb.RemovDailyRoute(a);
+            classDb.RemovDailyRoute(dailyRoute);
         }
     }
 }

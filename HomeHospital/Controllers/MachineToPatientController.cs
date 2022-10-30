@@ -9,36 +9,36 @@ using Bll;
 
 namespace HomeHospital.Controllers
 {
-    public class MachineToPatientController : ApiController
+    public class MachinesController : ApiController
     {
         ClassDb classDb = new ClassDb();
-        // GET: api/MachineToPatient
+        // GET: api/Machines
         public RequestResult Get()
         {
-            return classDb.GetAllEnquipmentOfPatient();
+            return classDb.GetAllEquipment();
         }
 
-        // GET: api/MachineToPatient/5
-        //public string Get(EnquipmentOfPatientDto a)
-        //{
-        //    classDb.AddEnquipmentOfPatient(a);
-        //}
-
-        // POST: api/MachineToPatient
-        public void Post(EnquipmentOfPatientDto a)
+        // GET: api/Machines/5
+        public string Get(int id)
         {
-            classDb.AddEnquipmentOfPatient(a);
+            return "value";
         }
 
-        // PUT: api/MachineToPatient/5
+        // POST: api/Machines
+        public void Post(EquipmentDto a)
+        {
+            classDb.AddEquipment(a);
+        }
+
+        // PUT: api/Machines/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/MachineToPatient/5
-        public void Delete(EnquipmentOfPatientDto a)
+        // DELETE: api/Machines/5
+        public void Delete(EquipmentDto a)
         {
-            classDb.RemovEnquipmentOfPatient(a);
+            classDb.RemovEquipment(a);
         }
     }
 }

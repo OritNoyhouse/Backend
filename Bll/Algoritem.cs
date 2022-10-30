@@ -17,13 +17,13 @@ namespace Bll
         }
 
         HashSet<int> _vertices = new HashSet<int>();
-        //מטריצת המשקלים
+        //weight matrix
         double[,] _adjacencyMatrix;
         NewArr[] newArr = new NewArr[1000];
         FinalResault[] finalResault = new FinalResault[1000];
         public OritProjectGoodLuckEntities2 db = OritProjectGoodLuckEntities2.Instance();
-        
-        //פונקצית התאמה של רופא,המקבלת פציינט ומחזירה את הרופא המתאים לאותו פציינט
+
+        //A doctor match function, which receives a patient and returns the doctor who matches that patient
         public int MachDoctor(Patient p)
         {
             OrderHomeHospitalization orders;
@@ -71,7 +71,7 @@ namespace Bll
         }
 
 
-        //בונה רשימת לוקישנים לכל רופא של כל המטופלים שהוא מבקר אצלם במשמרת,
+        //Builds a list of locutions for each doctor of all the patients he visits during the shift,
         public List<int> BuildListOfLocationsForDoctor(int idDoctor, int date)
         {
 
@@ -95,13 +95,13 @@ namespace Bll
             return listLocation;
         }
 
-        //מקבל מגוגל מפס אורך קשת וזמן,ומשקלל את זה למשקל קשת
+        //Gets arc length and time from google, and weights it to arc weight
         public double GetWighetOfEdjeOfTwoPointsFromGoogleMaps(int location1, int location2)
         {
-            //{שליחה לגוגל מפס את שתי הנקודות הנ"ל וגוגל מפס מחזירה את משקל הקשת בינם }
+            //{Sending the above two points to Google Maps and Google Maps returns the weight of the arc between them }
             return 12.0;
         }
-        //פונקציה שממלאה את האלכסון הראשי במטריצה באפסים שזה מקומות שהמרחק מנקודה לאותה נקודה היא אפס
+        //A function that fills the main diagonal in the matrix with zeros, which are places where the distance from a point to that point is zero
         public double[,] FillMatrix(int size)
         {
             double[,] rightmatrix = new double[size, size];
@@ -113,7 +113,7 @@ namespace Bll
             return rightmatrix;
         }
 
-        //פעולה שבונה את מטריצת המרחקים , מחשבת עבור כל  נקודה את המשקל לכל הנקודות שקיימות
+        //An operation that builds the distance matrix, calculates for each point the weight for all points that exist
         public double[,] BuildMatrixOfDistance(int idDoctor)
         {
             DailyReportToDoctor d = db.DailyReportToDoctor.Where(x => x.idDoctor == idDoctor).FirstOrDefault();
@@ -141,7 +141,7 @@ namespace Bll
 
         }
 
-        //פונקציה רקורסיבית המחזירה את משקל המסלול הנמוך ביותר,ובונה עץ עם כל הקודקודים שהיא עברה בהם
+        //A recursive function that returns the lowest route weight, and builds a tree with all the vertices it passed through
         public double GetMinimumCostRoute(int startVertex, HashSet<int> set, Node root)
         {
             if (!set.Any())
@@ -181,7 +181,7 @@ namespace Bll
             return totalCost;
 
         }
-        //פונקציה רקורסיבית המקבלת את העץ עם הקודקודים של המסלול ומחזירה את הקודקודים במערך
+        //A recursive function that receives the tree with the vertices of the route and returns the vertices in the array
         public int[] Rec(Node n, int i, int[] arr)
         {
 
@@ -206,7 +206,7 @@ namespace Bll
             return arr;
 
         }
-        //פונקצית זימון לבניית העץ,ולהחזירו במערך
+        //Summoning function to build the tree, and return it in an array
         public int[] Zimun(int start)
         {
             Node n = new Node();
@@ -217,7 +217,7 @@ namespace Bll
             return arr5;
 
         }
-        //הפונקציה מקבלת מערך של קודים של כתובות ומכינה רשימה של הכתובות הפיזיות(לא קודים)
+        //The function receives an array of address codes and prepares a list of the physical addresses (not codes)
         public List<FinalResault> End(int id)
         {
             _adjacencyMatrix= BuildMatrixOfDistance(id);

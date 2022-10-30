@@ -8,10 +8,10 @@ using Dto;
 
 namespace Bll
 {
-    public class Algorithemm
+    public class Algorithem
     {
 
-        public Algorithemm()
+        public Algorithem()
         {
 
         }

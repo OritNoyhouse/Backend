@@ -6,36 +6,44 @@ using System.Net.Http;
 using System.Web.Http;
 using Dto;
 using Bll;
-
+using System.Web.Http.Cors;
 namespace HomeHospital.Controllers
 {
-    public class FastestWayController : ApiController
+
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class DoctorController : ApiController
     {
+
         ClassDb classDb = new ClassDb();
-        // GET: api/FastestWay
-        public RequestResult Get()
+        // POST: api/Doctor
+        public void Post(DoctorsDto doctor)
         {
-            return classDb.GetAllDailyRoute();
-
+            classDb.AddDoctors(doctor);
         }
 
-        // GET: api/FastestWay/5
-        public string Get(int id)
+        // PUT: api/Doctor/5
+        public void Put(int id, [FromBody]string value)
         {
-            return "value";
         }
 
-        // POST: api/FastestWay
-        public void Post(DailyRouteDto dailyRoute)
+        // DELETE: api/Doctor/5
+        public void Delete(DoctorsDto a)
         {
-            classDb.AddDailyRoute(dailyRoute);
+             classDb.RemoveDoctors(a);
         }
-      
+        [HttpPost]
+        [Route("api/Doctor/8")]
+        public void PostDoctor(DoctorsDto a)
+        {
+            classDb.AddDoctors(a);
+        }
+        [HttpGet]
+        [Route("api/Doctor/18/{password}")]
+        public object GettDoctor(string password)
+        {
 
-        // DELETE: api/FastestWay/5
-        public void Delete(DailyRouteDto dailyRoute)
-        {
-            classDb.RemovDailyRoute(dailyRoute);
+            return classDb.GetDoctor(password).Data; 
         }
+
     }
 }

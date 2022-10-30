@@ -9,36 +9,36 @@ using Bll;
 
 namespace HomeHospital.Controllers
 {
-    public class StatusCovid19Controller : ApiController
+    public class ScheduleToDoctorController : ApiController
     {
         ClassDb classDb = new ClassDb();
-        // GET: api/StatusCovid19
+        // GET: api/ScheduleToDoctor
         public RequestResult Get()
         {
-            return classDb.GetAllStatusCovid19();
+            return classDb.GetAllScheduleForDoctor();
         }
 
-        // GET: api/StatusCovid19/5
+        // GET: api/ScheduleToDoctor/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/StatusCovid19
-        public void Post(StatusCovidDto a)
+        // POST: api/ScheduleToDoctor
+        public void Post(ScheduleForDoctorDto a)
         {
-            classDb.AddStatusCovid19(a);
+            classDb.AddScheduleForDoctor(a);
         }
 
-        // PUT: api/StatusCovid19/5
+        // PUT: api/ScheduleToDoctor/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/StatusCovid19/5
-        public void Delete(StatusCovidDto a)
+        // DELETE: api/ScheduleToDoctor/5
+        public void Delete(ScheduleForDoctorDto a)
         {
-            classDb.RemovStatusCovid19(a);
+            classDb.RemoveScheduleForDoctor(a);
         }
     }
 }

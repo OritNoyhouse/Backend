@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dal;
 using Dto;
+
+using System.Windows;
 
 namespace Bll
 {
@@ -13,29 +15,51 @@ namespace Bll
      
 
         public OritProjectGoodLuckEntities2 db = OritProjectGoodLuckEntities2.Instance();
-
-
+        Algorithemm al = new Algorithemm();
+        GoogleMap googleMap;
         //Address
         public RequestResult GetAllAddress()  
         {
             List<AdressDto> lst = new List<AdressDto>();
-            foreach (var item in db.Adress.ToList())
+            foreach (var item in db.Adresse.ToList())
             {
+                
                 lst.Add(AdressDto.DalToDto(item));
             }
             return new RequestResult() { Data = lst, Message = "success", Status = true };
         }
-        public void AddAddress(AdressDto a)
+        
+        public void AddAddress(AdressDto a,int id)
         {
-            db.Adress.Add(a.DtoTODal());
-            db.SaveChanges();
+            if (db.Patient.Where(x => x.id == id).FirstOrDefault().codeAdress != null)
+                return;
+            else
+            {
+                db.Adresse.Add(a.DtoTODal());
+                Patient p = db.Patient.Where(x => x.id == id).FirstOrDefault();
+                p.codeAdress = a.CodeAdress;
+                db.SaveChanges();
+            }
         }
+       
         public void RemoveAddress(AdressDto a)
         {
-            db.Adress.Remove(a.DtoTODal());
+            db.Adresse.Remove(a.DtoTODal());
             db.SaveChanges();
         }
         //Patient
+        public RequestResult GetPatient( string password)
+        {
+
+            Patient p = db.Patient.Where(x =>  x.password == password).FirstOrDefault();
+            return new RequestResult() { Data = p, Message = "success", Status = true };
+        }
+        public RequestResult GetDoctor(string password)
+        {
+
+            Doctor d = db.Doctor.Where(x => x.password == password).FirstOrDefault();
+            return new RequestResult() { Data = d, Message = "success", Status = true };
+        }
         public RequestResult GetAllPatients()
         {
             List<PatientsDto> lst = new List<PatientsDto>();
@@ -47,6 +71,16 @@ namespace Bll
         }
         public void AddPatients(PatientsDto a)
         {
+            if (a.codeAdress == 0)
+                a.codeAdress = null;
+            if (a.locationId == 0)
+                a.locationId = null;
+            if (a.doctorId == 0)
+               a.doctorId = null;
+            if (a.medicalCondition == 0)
+                a.medicalCondition = null;
+            if (a.statuscovid19 == 0)
+                a.statuscovid19 = null;
             db.Patient.Add(a.DtoTODal());
             db.SaveChanges();
         }
@@ -67,8 +101,14 @@ namespace Bll
         }
         public void AddDoctors(DoctorsDto a)
         {
-            db.Doctor.Add(a.DtoTODal());
-            db.SaveChanges();
+            
+           
+                if (a.codeAdress == 0)
+                    a.codeAdress = null;
+                db.Doctor.Add(a.DtoTODal());
+                db.SaveChanges();
+            
+           
         }
         public void RemoveDoctors(DoctorsDto a)
         {
@@ -197,14 +237,11 @@ namespace Bll
             db.DailyRoute.Remove(a.DtoTODal());
             db.SaveChanges();
         }
-        //DailyDailyReportToDoctor
-        public RequestResult GetAllDailyReportToDoctor()
+        
+       
+        public RequestResult GetDailyReportToDoctor(int id,int date)
         {
-            List<DailyReportToDoctorDto> lst = new List<DailyReportToDoctorDto>();
-            foreach (var item in db.DailyReportToDoctor.ToList())
-            {
-                lst.Add(DailyReportToDoctorDto.DalToDto(item));
-            }
+            List<FinalResault> lst=al.End( id);
             return new RequestResult() { Data = lst, Message = "success", Status = true };
         }
         public void AddDailyReportToDoctor(DailyReportToDoctorDto a)
@@ -219,17 +256,23 @@ namespace Bll
         }
 
         //OrderHomeHospitalization
-        public RequestResult GetAllOrderHomeHospitalization()
+        public RequestResult GetAllOrderHomeHospitalization(int id)
         {
             List<OrderHomeHospitalizationDto> lst = new List<OrderHomeHospitalizationDto>();
             foreach (var item in db.OrderHomeHospitalization.ToList())
             {
-                lst.Add(OrderHomeHospitalizationDto.DalToDto(item));
+                if(item.idPatient==id)
+                lst.Add(  OrderHomeHospitalizationDto.DalToDto(item));
             }
             return new RequestResult() { Data = lst, Message = "success", Status = true };
         }
         public void AddOrderHomeHospitalization(OrderHomeHospitalizationDto a)
         {
+            Patient p = db.Patient.Where(x => x.id == a.IdPatient).FirstOrDefault();
+            //a.IdDoctor= al.MachDoctor(p);
+            a.IdDoctor = null;
+            a.LevelOfUrgent = null;
+            a.HourOfVisit = null;
             db.OrderHomeHospitalization.Add(a.DtoTODal());
             db.SaveChanges();
         }
